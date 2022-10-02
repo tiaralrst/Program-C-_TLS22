@@ -1,0 +1,59 @@
+#include <iostream>
+#include <iomanip>
+#include <stdlib.h>
+using namespace std;
+int nK=0;
+void kabisat(int nY){
+    if(nY%4==0){
+        if(nY%100==0){if(nY%400==0){nK=1;}}
+            else{nK=1;}
+        cout<<nK;}
+    }
+int daycode(int nY,int nDTY){
+    int k,s;
+    k=(nY-1)/4;
+    s=(nY+k+nDTY)%7;
+    return s;
+    }
+int main(){
+    int nM,nTD,nTDY,nD,nDC,nDAY[7];
+    string sNM;
+    int nY;
+    do{
+    cout<<"Month = ";cin>>nM;
+    if(nM<0||nM>12){cout<<"Input Error !!\n";}
+    }while(nM<0||nM>12);
+    cout<<"Year = ";cin>>nY;
+    kabisat(nY);
+    switch(nM)
+        {
+            case 1: sNM="January";nTD=31;nTDY=1;break;
+            case 2: sNM="February";if(nK==0){nTD=28;}
+                                    else {nTD=29;}
+                                    nTDY=32;break;
+            case 3: sNM="March";nTD=31;nTDY=60;break;
+            case 4: sNM="April";nTD=30;nTDY=91;break;
+            case 5: sNM="May";nTD=31;nTDY=121;break;
+            case 6: sNM="June";nTD=30;nTDY=152;break;
+            case 7: sNM="July";nTD=31;nTDY=182;break;
+            case 8: sNM="August";nTD=31;nTDY=213;break;
+            case 9: sNM="September";nTD=30;nTDY=244;break;
+            case 10: sNM="October";nTD=31;nTDY=274;break;
+            case 11: sNM="November";nTD=30;nTDY=305;break;
+            case 12: sNM="December";nTD=31;nTDY=335;break;
+        }
+    if(nK==1&&nM!=1&&nM!=2){nTDY++;}
+    nDC=daycode(nY,nTDY);
+    if(nDC<0){nDC=-nDC;}
+    system("cls");
+    cout<<sNM<<", "<<nY<<" Masehi\n\n\n";
+    cout<<"Jumat \tSabtu \tMinggu \tSenin \tSelasa \tRabu \tKamis\n\n\n";
+    for(int i=1;i<=nDC;i++){cout<<"\t";}
+    for(int i=1;i<=nTD;i++,nDC++){
+        cout<<setw(3)<<i<<"\t";
+        if(nDC-6==0){cout<<"\n\n";nDC=-1;}
+        }
+    cout<<endl;
+
+ }
+
